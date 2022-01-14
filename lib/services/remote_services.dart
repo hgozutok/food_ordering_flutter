@@ -24,12 +24,12 @@ class RemoteService {
   static Future<List<Menu>?> getMenus() async {
     try {
       var response = await http.get(Uri.parse(Constants.menus));
-      print("response.body");
-      print(response);
+      //print("response.body");
+      //print(response);
       if (response.statusCode == 200) {
         List<dynamic> body = json.decode(response.body);
-        print("response.body");
-        print(response.body);
+        // print("response.body");
+        // print(response.body);
         return body.map((dynamic item) => Menu.fromJson(item)).toList();
       } else {
         return null;

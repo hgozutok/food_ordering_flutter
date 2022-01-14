@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:food_ordering_flutter/constants/colors.dart';
 import 'package:food_ordering_flutter/pages/home_page.dart';
 import 'package:get/get.dart';
 
@@ -68,6 +69,10 @@ class _MyHomePageState extends State<MyHomePage> {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Food Delivery',
+      theme: ThemeData(
+        primarySwatch: colorCustom,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
       home: Scaffold(
         body: Container(
           decoration: BoxDecoration(

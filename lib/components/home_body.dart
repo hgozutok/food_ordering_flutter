@@ -20,17 +20,17 @@ class _HomeBodyState extends State<HomeBody> {
     return Container(
       // color: backgroundColorLight,
       width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height,
+      //  height: MediaQuery.of(context).size.height,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           CustomAppBar(),
-          SizedBox(height: 20),
+          SizedBox(height: 5),
           Restaurant(),
-          SizedBox(height: 20),
+          SizedBox(height: 5),
           MenuTypeComp(),
-          SizedBox(height: 20),
+          SizedBox(height: 5),
           Menus(),
         ],
       ),

@@ -18,7 +18,7 @@ class _MenuTypeCompState extends State<MenuTypeComp> {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 20),
       child: SizedBox(
-        height: 60,
+        height: 50,
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 10),
           width: MediaQuery.of(context).size.width,
@@ -61,9 +61,6 @@ class _MenuTypeCompState extends State<MenuTypeComp> {
                                 ),
                               ),
                             ),
-                          ),
-                          SizedBox(
-                            width: 10,
                           ),
                         ],
                       ),

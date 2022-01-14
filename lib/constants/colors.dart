@@ -13,10 +13,23 @@ class HexColor extends Color {
   HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
 }
 
-// 0xFF
+Map<int, Color> mcolor = {
+  50: Color.fromRGBO(136, 14, 79, .1),
+  100: Color.fromRGBO(136, 14, 79, .2),
+  200: Color.fromRGBO(136, 14, 79, .3),
+  300: Color.fromRGBO(136, 14, 79, .4),
+  400: Color.fromRGBO(136, 14, 79, .5),
+  500: Color.fromRGBO(136, 14, 79, .6),
+  600: Color.fromRGBO(136, 14, 79, .7),
+  700: Color.fromRGBO(136, 14, 79, .8),
+  800: Color.fromRGBO(136, 14, 79, .9),
+  900: Color.fromRGBO(136, 14, 79, 1),
+};
 
+// 0xFF
 const Color backgroundColor = Color(0xFFF5F5F5);
 const Color primaryColor = Color(0xFFad1357);
+MaterialColor colorCustom = MaterialColor(0xFF880E4F, mcolor);
 const Color secondaryColor = Color(0xFF6a1b9a);
 const Color accentColor = Color(0xFF42A5F5);
 const Color errorColor = Color(0xFFB71C1C);

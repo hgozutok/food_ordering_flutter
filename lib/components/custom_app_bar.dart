@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_ordering_flutter/constants/colors.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({Key? key}) : super(key: key);
@@ -22,7 +23,7 @@ class CustomAppBar extends StatelessWidget {
               color: Colors.transparent,
             ),
             child: IconButton(
-              icon: Icon(leftIcon, color: Colors.white),
+              icon: Icon(leftIcon, color: secondaryColor),
               onPressed: () {},
             ),
           ),
@@ -35,11 +36,11 @@ class CustomAppBar extends StatelessWidget {
             child: Row(
               children: [
                 IconButton(
-                  icon: Icon(rightIcon, color: Colors.white),
+                  icon: Icon(rightIcon, color: secondaryColor),
                   onPressed: () {},
                 ),
                 IconButton(
-                  icon: Icon(Icons.person, color: Colors.white),
+                  icon: Icon(Icons.person, color: secondaryColor),
                   onPressed: () {},
                 ),
               ],
