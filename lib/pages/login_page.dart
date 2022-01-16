@@ -54,53 +54,30 @@ class _LoginPageState extends State<LoginPage> {
                     _controller.activeUser.value.errorLogin!.errors!.toString(),
                     backgroundColor: Colors.red,
                     colorText: Colors.white,
+                    duration: Duration(seconds: 3),
                   );
                 } else {
                   if (_controller.activeUser.value.email != null) {
-                    Get.offAll(HomePage());
-                    // } else {
-                    //   Get.snackbar(
-                    //     'Error',
-                    //     'Something went wrong',
-                    //     backgroundColor: Colors.red,
-                    //     colorText: Colors.white,
-                    //   );
-                    // }
-
+                    Get.snackbar(
+                      'Login',
+                      'Logged in successfully',
+                      backgroundColor: Colors.green,
+                      colorText: Colors.white,
+                      duration: Duration(seconds: 3),
+                    );
+                    Get.to(HomePage());
                   }
                 }
-
-                // await _controller.loginUser(_loginModel).then((value) => {
-                //       if (value!.message != null)
-                //         {
-                //           Get.offAll(HomePage()),
-                //           Get.snackbar('Success', 'Login Successful',
-                //               snackPosition: SnackPosition.BOTTOM)
-                //         }
-                //       else
-                //         {
-                //           Get.snackbar('Error', 'Login Failed' + value.message!,
-                //               snackPosition: SnackPosition.BOTTOM)
-                //         }
-                //     });
-
-                //   if (_controller.activeUser.value.email != null) {
-                //     Get.to(HomePage());
-                //   } else {
-                //     Get.snackbar('Error', 'Invalid Credentials' + user.message!,
-                //         snackPosition: SnackPosition.BOTTOM,
-                //         backgroundColor: Colors.red,
-                //         borderRadius: 10,
-                //         margin: EdgeInsets.all(10),
-                //         snackStyle: SnackStyle.FLOATING,
-                //         animationDuration: Duration(seconds: 1));
-                //   }
               },
             ),
             SizedBox(
               height: 10,
             ),
-            ElevatedButton(onPressed: () {}, child: Text("Cancel")),
+            ElevatedButton(
+                onPressed: () {
+                  Get.to(HomePage());
+                },
+                child: Text("Cancel")),
             SizedBox(height: 10),
             Text('Forgot password?'),
             SizedBox(height: 10),

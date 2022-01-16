@@ -30,7 +30,7 @@ class AuthService {
         //  print("object");
         // token = responseData['token'];
         var user = User.fromJson(responseData);
-        user.errorLogin = ErrorLogin.fromJson((responseData));
+        //  user.errorLogin = ErrorLogin.fromJson((responseData));
         return user;
       } catch (e) {
         return User();

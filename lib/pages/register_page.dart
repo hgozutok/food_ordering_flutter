@@ -92,6 +92,12 @@ class _RegisterPageState extends State<RegisterPage> {
               }
             },
           ),
+          SizedBox(height: 10),
+          ElevatedButton(
+              onPressed: () {
+                Get.to(HomePage());
+              },
+              child: Text("Cancel")),
         ],
       ),
     );
