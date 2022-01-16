@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:food_ordering_flutter/components/home_body.dart';
 import 'package:food_ordering_flutter/constants/colors.dart';
+import 'package:food_ordering_flutter/controller/user_controller.dart';
 import 'package:food_ordering_flutter/pages/cart_page.dart';
 import 'package:food_ordering_flutter/pages/login_page.dart';
+import 'package:food_ordering_flutter/pages/profile_page.dart';
 import 'package:get/get.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,6 +17,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    UserController _controller = Get.put(UserController(), permanent: true);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: secondaryColor,
@@ -33,7 +37,11 @@ class _HomePageState extends State<HomePage> {
               color: Colors.white,
             ),
             onPressed: () {
-              Get.to(LoginPage());
+              if (_controller.activeUser.value.email == null) {
+                Get.to(LoginPage());
+              } else {
+                Get.to(UserProfilePage());
+              }
             },
           ),
           IconButton(

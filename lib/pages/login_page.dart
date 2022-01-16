@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_ordering_flutter/controller/user_controller.dart';
 import 'package:food_ordering_flutter/models/login_model.dart';
+import 'package:food_ordering_flutter/models/user.dart';
 import 'package:food_ordering_flutter/pages/home_page.dart';
 import 'package:food_ordering_flutter/pages/register_page.dart';
 import 'package:food_ordering_flutter/services/auth_service.dart';
@@ -16,7 +17,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
-    AuthService _controller = Get.put(AuthService(), permanent: true);
+    UserController _controller = Get.put(UserController(), permanent: true);
     LoginModel _loginModel = LoginModel();
     TextEditingController _emailController = TextEditingController();
     TextEditingController _passwordController = TextEditingController();
@@ -40,23 +41,60 @@ class _LoginPageState extends State<LoginPage> {
             ),
             ElevatedButton(
               child: Text('Login'),
-              onPressed: () {
+              onPressed: () async {
                 _loginModel.email = _emailController.text;
                 _loginModel.password = _passwordController.text;
+                var user = await _controller.loginUser(_loginModel);
+                print("_controller.activeUser.value.errorLogin");
+                print(_controller.activeUser.value.errorLogin);
+                if (_controller.activeUser.value.errorLogin != null ||
+                    _controller.activeUser.value.email == null) {
+                  Get.snackbar(
+                    'Error',
+                    _controller.activeUser.value.errorLogin!.errors!.toString(),
+                    backgroundColor: Colors.red,
+                    colorText: Colors.white,
+                  );
+                } else {
+                  if (_controller.activeUser.value.email != null) {
+                    Get.offAll(HomePage());
+                    // } else {
+                    //   Get.snackbar(
+                    //     'Error',
+                    //     'Something went wrong',
+                    //     backgroundColor: Colors.red,
+                    //     colorText: Colors.white,
+                    //   );
+                    // }
 
-                _controller.loginUser(_loginModel).then((value) {
-                  if (value != null) {
-                    Get.to(HomePage());
-                  } else {
-                    Get.snackbar('Error', 'Invalid Credentials',
-                        snackPosition: SnackPosition.BOTTOM,
-                        backgroundColor: Colors.red,
-                        borderRadius: 10,
-                        margin: EdgeInsets.all(10),
-                        snackStyle: SnackStyle.FLOATING,
-                        animationDuration: Duration(seconds: 1));
                   }
-                });
+                }
+
+                // await _controller.loginUser(_loginModel).then((value) => {
+                //       if (value!.message != null)
+                //         {
+                //           Get.offAll(HomePage()),
+                //           Get.snackbar('Success', 'Login Successful',
+                //               snackPosition: SnackPosition.BOTTOM)
+                //         }
+                //       else
+                //         {
+                //           Get.snackbar('Error', 'Login Failed' + value.message!,
+                //               snackPosition: SnackPosition.BOTTOM)
+                //         }
+                //     });
+
+                //   if (_controller.activeUser.value.email != null) {
+                //     Get.to(HomePage());
+                //   } else {
+                //     Get.snackbar('Error', 'Invalid Credentials' + user.message!,
+                //         snackPosition: SnackPosition.BOTTOM,
+                //         backgroundColor: Colors.red,
+                //         borderRadius: 10,
+                //         margin: EdgeInsets.all(10),
+                //         snackStyle: SnackStyle.FLOATING,
+                //         animationDuration: Duration(seconds: 1));
+                //   }
               },
             ),
             SizedBox(

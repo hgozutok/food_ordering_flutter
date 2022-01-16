@@ -1,6 +1,8 @@
 import 'package:food_ordering_flutter/constants/constants.dart';
+import 'package:food_ordering_flutter/models/error_login.dart';
 import 'package:food_ordering_flutter/models/login_model.dart';
 import 'package:food_ordering_flutter/models/register_model.dart';
+import 'package:food_ordering_flutter/models/user.dart';
 import 'package:food_ordering_flutter/pages/home_page.dart';
 import 'package:get/get.dart';
 
@@ -9,7 +11,7 @@ import 'dart:convert';
 
 class AuthService {
   String? token;
-  Future<String?> loginUser(LoginModel model) async {
+  static Future<User?> loginUser(LoginModel model) async {
     var response = await http.post(
       Uri.parse(Constants.login),
       headers: {
@@ -19,27 +21,52 @@ class AuthService {
       //body: model,
     );
 
-    print(response.body);
+    print(response.toString());
     if (response.statusCode == 200) {
-      final Map<String, dynamic> responseData = json.decode(response.body);
-      print(responseData);
-      if (responseData.containsKey('token')) {
-        print("object");
-        token = responseData['token'];
-        return responseData['token'];
-      } else {
-        token = null;
-        return null;
+      try {
+        final Map<String, dynamic> responseData = json.decode(response.body);
+        // print(responseData);
+        // if (responseData.containsKey('token')) {
+        //  print("object");
+        // token = responseData['token'];
+        var user = User.fromJson(responseData);
+        user.errorLogin = ErrorLogin.fromJson((responseData));
+        return user;
+      } catch (e) {
+        return User();
       }
-      //  return response.body;
     } else {
-      token = null;
-      return null;
+      try {
+        User usernl = User();
+        final Map<String, dynamic> responseData = json.decode(response.body);
+        //print(response.body.toString());
+        // usernl.errorLogin = responseData['errors'];
+        usernl.errorLogin = ErrorLogin.fromJson((responseData));
+
+        return usernl;
+      } catch (e) {
+        print("eror");
+        var user = User();
+        ErrorLogin errorLogin = ErrorLogin();
+
+        Map<String, dynamic>? errors = {'error': "Please try again later.."};
+
+        errorLogin.errors = errors;
+
+        //  user.errorLogin = ErrorLogin.fromJson((errors));
+        user.errorLogin = errorLogin;
+
+        return user;
+      }
     }
+    //  return response.body;
+    //} else {
+    //   token = null;
+    //return null;
   }
 
   bool logoutUser() {
-    token = null;
+    // token = null;
     Get.to(HomePage());
     return true;
   }
