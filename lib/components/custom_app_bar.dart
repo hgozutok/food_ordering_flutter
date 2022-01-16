@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_ordering_flutter/constants/colors.dart';
+import 'package:food_ordering_flutter/pages/cart_page.dart';
+import 'package:get/get.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({Key? key}) : super(key: key);
@@ -42,6 +44,12 @@ class CustomAppBar extends StatelessWidget {
                 IconButton(
                   icon: Icon(Icons.person, color: secondaryColor),
                   onPressed: () {},
+                ),
+                IconButton(
+                  icon: Icon(Icons.shopping_bag, color: secondaryColor),
+                  onPressed: () {
+                    Get.to(CartPage());
+                  },
                 ),
               ],
             ),

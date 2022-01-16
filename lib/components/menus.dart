@@ -14,7 +14,10 @@ class Menus extends StatefulWidget {
 class _MenusState extends State<Menus> {
   @override
   Widget build(BuildContext context) {
-    final menusController = Get.put(MenusController());
+    MenusController menusController = Get.put(
+      MenusController(),
+      permanent: true,
+    );
 
     return SingleChildScrollView(
       child: Padding(
@@ -116,12 +119,13 @@ class _MenusState extends State<Menus> {
                                   trailing: Icon(Icons.arrow_forward_ios,
                                       color: secondaryColor),
                                   onTap: () {
-                                    setState(() {
-                                      menusController.selectedIndex = index;
-                                      Get.to(DetailPage(
-                                          menu: menusController.menus[index]));
-                                      // categoriesController.categories[index];
-                                    });
+                                    menusController.selectedIndex = index;
+                                    Get.to(DetailPage(),
+                                        arguments:
+                                            menusController.menus[index]);
+                                    // ,
+                                    //    menu: menusController.menus[index]));
+                                    // categoriesController.categories[index];
                                   },
                                 ),
                               ),

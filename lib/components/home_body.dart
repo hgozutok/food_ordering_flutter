@@ -25,7 +25,7 @@ class _HomeBodyState extends State<HomeBody> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          CustomAppBar(),
+          // CustomAppBar(),
           SizedBox(height: 5),
           Restaurant(),
           SizedBox(height: 5),

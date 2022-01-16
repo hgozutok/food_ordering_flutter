@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:food_ordering_flutter/constants/colors.dart';
+
+import 'package:food_ordering_flutter/models/routes.dart';
+import 'package:food_ordering_flutter/pages/cart_page.dart';
 import 'package:food_ordering_flutter/pages/home_page.dart';
 import 'package:get/get.dart';
 
@@ -14,12 +17,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
+    return GetMaterialApp(
+      initialRoute: Routes.home,
+      getPages: Routes.getPages,
+      title: 'Food Ordering',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Food Ordering App'),
     );
   }
 }
@@ -66,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // final double fillStop = (100 - fillPercent) / 100;
     // final List<double> stops = [0.0, fillStop, fillStop, 1.0];
 
-    return GetMaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Food Delivery',
       theme: ThemeData(
