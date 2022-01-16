@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:food_ordering_flutter/components/home_body.dart';
 import 'package:food_ordering_flutter/constants/colors.dart';
-import 'package:food_ordering_flutter/controller/cart_controller.dart';
-import 'package:food_ordering_flutter/models/routes.dart';
 import 'package:food_ordering_flutter/pages/cart_page.dart';
+import 'package:food_ordering_flutter/pages/login_page.dart';
 import 'package:get/get.dart';
 
 class HomePage extends StatefulWidget {
@@ -30,10 +29,12 @@ class _HomePageState extends State<HomePage> {
         actions: <Widget>[
           IconButton(
             icon: Icon(
-              Icons.favorite_border,
+              Icons.person,
               color: Colors.white,
             ),
-            onPressed: () {},
+            onPressed: () {
+              Get.to(LoginPage());
+            },
           ),
           IconButton(
             icon: Icon(Icons.shopping_bag, color: secondaryColor),

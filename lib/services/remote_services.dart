@@ -1,6 +1,7 @@
 import 'package:food_ordering_flutter/constants/constants.dart';
 import 'package:food_ordering_flutter/models/menu.dart';
 import 'package:food_ordering_flutter/models/menu_type.dart';
+import 'package:food_ordering_flutter/models/register_model.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
