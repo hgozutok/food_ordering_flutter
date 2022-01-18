@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:food_ordering_flutter/constants/colors.dart';
 import 'package:food_ordering_flutter/controller/cart_controller.dart';
+import 'package:food_ordering_flutter/controller/user_controller.dart';
 
 import 'package:food_ordering_flutter/models/cart.dart';
+import 'package:food_ordering_flutter/models/order.dart';
+import 'package:food_ordering_flutter/pages/checkout_page.dart';
 import 'package:get/get.dart';
 
 class CartPage extends StatefulWidget {
@@ -16,6 +19,10 @@ class _CartPageState extends State<CartPage> {
   //Cart cart = Get.put(Cart());
   CartController cartController = Get.put(
     CartController(),
+    permanent: true,
+  );
+  UserController userController = Get.put(
+    UserController(),
     permanent: true,
   );
   //CartController cartController = Get.find();
@@ -34,18 +41,19 @@ class _CartPageState extends State<CartPage> {
         title: Text('Cart'),
       ),
       body: Obx(
-        () => cartController.cart.length == 0
+        () => cartController.cart.value.items.length == 0
             ? Center(
                 child: Text('No items in cart'),
               )
             : ListView.builder(
-                itemCount: cartController.cart.length,
+                itemCount: cartController.cart.value.items.length,
                 itemBuilder: (context, index) {
                   return Dismissible(
-                    key: Key(cartController.cart[index].id),
+                    key: Key(cartController.cart.value.items[index].id),
                     onDismissed: (direction) {
                       setState(() {
-                        cartController.removeItem(cartController.cart[index]);
+                        cartController
+                            .removeItem(cartController.cart.value.items[index]);
                       });
                     },
                     direction: DismissDirection.endToStart,
@@ -64,16 +72,18 @@ class _CartPageState extends State<CartPage> {
                     child: ListTile(
                       leading: CircleAvatar(
                         backgroundImage: NetworkImage(
-                          cartController.cart[index].image.toString(),
+                          cartController.cart.value.items[index].image
+                              .toString(),
                         ),
                       ),
-                      title: Text(cartController.cart[index].title),
+                      title: Text(cartController.cart.value.items[index].title),
                       subtitle: Text(
-                          '${cartController.cart[index].quantity} x ${cartController.cart[index].price}'),
+                          '${cartController.cart.value.items[index].quantity} x ${cartController.cart.value.items[index].price}'),
                       trailing: Text(
-                          '${cartController.cart[index].quantity * cartController.cart[index].price}'),
+                          '${cartController.cart.value.items[index].quantity * cartController.cart.value.items[index].price}'),
                       onLongPress: () {
-                        cartController.removeItem(cartController.cart[index]);
+                        cartController
+                            .removeItem(cartController.cart.value.items[index]);
                       },
                     ),
                   );
@@ -81,7 +91,7 @@ class _CartPageState extends State<CartPage> {
               ),
       ),
       bottomNavigationBar: Obx(
-        () => cartController.cart.length == 0
+        () => cartController.cart.value.items.length == 0
             ? Container()
             : Container(
                 color: primaryColor.withOpacity(0.3),
@@ -104,7 +114,27 @@ class _CartPageState extends State<CartPage> {
                         ),
                       ),
                       onPressed: () {
-                        Get.toNamed('/checkout');
+                        Order order = Order();
+                        // order.customerId =
+                        //     userController.activeUser.value.email.toString();
+                        // var details = Tblorderdetails();
+
+                        // cartController.cart.forEach((element) {
+                        //   // orderId: order.orderId as int,
+                        //   details.menuId = 1;
+                        //   //element.id as int,
+                        //   details.amount = element.quantity as int;
+                        //   detailstotalAmount:
+                        //   element.price;
+                        // });
+                        // order.tblorderdetails!.add(details);
+
+                        // order.totalAmount = 100;
+                        // // cartController.totalPrice.value as int;
+                        // order.orderStatus = 0;
+                        // //    cartController.clearCart();
+
+                        Get.to(CheckoutPage(cart: cartController.cart.value));
                       },
                     ),
                   ],

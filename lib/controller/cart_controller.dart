@@ -2,16 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:food_ordering_flutter/models/cart.dart';
 
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
 
 class CartController extends GetxController {
-  List<dynamic> cart = [].obs;
+  Rx<Cart> cart = Cart().obs;
   Rx<double> totalPrice = 0.0.obs;
   //var cart = Cart();
 
   void addItem(String productId, double price, String title, int quantity,
       String image) {
-    cart.add(CartItem(
+    cart.value.items.add(CartItem(
       id: productId,
       title: title,
       price: price,
@@ -22,13 +21,14 @@ class CartController extends GetxController {
   }
 
   void removeItem(String productId) {
-    totalPrice -= cart.firstWhere((item) => item.id == productId).price;
-    cart.removeWhere((item) => item.id == productId);
+    totalPrice -=
+        cart.value.items.firstWhere((item) => item.id == productId).price;
+    cart.value.items.removeWhere((item) => item.id == productId);
   }
 
   double getTotalPrice() {
     // totalPrice.value = 0.0;
-    cart.forEach((item) {
+    cart.value.items.forEach((item) {
       totalPrice += (item.price * item.quantity);
     });
     return totalPrice.value;
@@ -41,4 +41,9 @@ class CartController extends GetxController {
 
   @override
   void onDispose() {}
+
+  void clearCart() {
+    cart.value.items.clear();
+    totalPrice.value = 0.0;
+  }
 }
