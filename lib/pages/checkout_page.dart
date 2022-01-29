@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_ordering_flutter/constants/colors.dart';
 import 'package:food_ordering_flutter/models/cart.dart';
 import 'package:food_ordering_flutter/models/order.dart';
-import 'package:get/get.dart';
+ 
 
 class CheckoutPage extends StatefulWidget {
   final Cart cart;
@@ -138,7 +138,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                 order.orderDate = DateTime.now().toString();
                 order.orderStatus = 0;
                 order.processedBy = 1;
-
+               
                 // Get.to();
                 //       .pushNamed('/order', arguments: widget.cart);
               },

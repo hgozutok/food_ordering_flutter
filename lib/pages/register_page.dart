@@ -12,7 +12,7 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  UserController _controller = Get.put(UserController(), permanent: true);
+  final UserController _controller = Get.put(UserController(), permanent: true);
   RegisterModel model = RegisterModel();
 
   @override
@@ -22,8 +22,8 @@ class _RegisterPageState extends State<RegisterPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Text('Register Page'),
-          SizedBox(height: 10),
+          const Text('Register Page'),
+          const SizedBox(height: 10),
           TextField(
             controller: _controller.firstNameController,
             decoration: InputDecoration(
